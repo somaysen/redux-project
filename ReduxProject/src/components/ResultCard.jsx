@@ -1,15 +1,26 @@
-import React from 'react'
+import { useDispatch } from "react-redux";
+import { addCollection } from "../redux/features/collectionSlice";
 
 function ResultCard({ item }) {
+
+    const dispatch = useDispatch();
+
+    const addToCollection = (item) => {
+        dispatch(addCollection(item));
+    }
+
   return (
     <div className='w-[18vw] h-66 relative bg-zinc-300  rounded-2xl overflow-hidden ' >
-      <div className='h-full ' >
-        {item.type == "photo" ? <img className='h-full w-full object-cover object-center ' src={item.src} alt='' /> : ""}
-        {item.type == "video" ? <video autoPlay loop muted className='h-full w-full object-cover object-center ' src={item.src} ></video> : ""}
-        {item.type == "gif" ? <img className='h-full w-full object-cover object-center ' src={item.src} alt="" /> : ""}
-      </div>
-      <div id="bottom" className=' w-full px-4 py-6 absolute bottom-0 text-white' >
-        <h1 className='text-sm font-semibold capitalize ' >{item.title}</h1>
+      <a target="_black" href={item.url} className='h-full w-full ' >
+        {item.type == "photo" ? <img className=' w-full h-full object-cover object-center ' src={item.src} alt='' /> : ""}
+        {item.type == "video" ? <video autoPlay loop muted className=' w-full h-full object-cover object-center ' src={item.src} ></video> : ""}
+        {item.type == "gif" ? <img className=' w-full h-full object-cover object-center ' src={item.src} alt="" /> : ""}
+      </a>
+      <div id="bottom" className=' w-full px-4 py-6 absolute bottom-0 flex items-center justify-between text-white' >
+        <h1 className='text-xs font-semibold capitalize leading-tight line-clamp-2 ' >{item.title}</h1>
+        <button onClick={() => {
+          addToCollection(item)
+        }} className='px-3 py-1 active:scale-95  rounded bg-blue-500 text-white cursor-pointer font-medium ' >Save</button>
       </div>
     </div>
   )

@@ -32,7 +32,7 @@ export const fetchVideo = async (query, per_page = 15) => {
   return res.data;
 };
 
-export const fetchGIF = async (query, limit = 20) => {
+export const fetchGIF = async (query, limit = 50) => {
   const res = await axios.get(
     "https://tenor.googleapis.com/v2/search",
     {

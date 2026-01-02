@@ -26,7 +26,7 @@ function ResultGrid() {
                         title: item.alt_description,
                         thumbnail: item.urls.small,
                         src: item.urls.full,
-                        url:item.link.html
+                        url:item.links.html
                     }))
                 }
                 if (activeTab == 'videos') {
@@ -37,7 +37,7 @@ function ResultGrid() {
                         title: item.user.name || 'video',
                         thumbnail: item.image,
                         src: item.video_files[0].link,
-
+                        url:item.url
                     }))
                 }
                 if (activeTab == 'gif') {
@@ -47,9 +47,11 @@ function ResultGrid() {
                         title: item.title || 'GIF',
                         type: 'gif',
                         thumbnail: item.media_formats.tinygif.url,
-                        src: item.media_formats.gif.url
+                        src: item.media_formats.gif.url,
+                        url:item.url
                     }))
                 }
+                console.log(data)
                 dispatch(setResults(data))
             } catch (error) {
                 dispatch(setError(error.mess))
@@ -57,7 +59,7 @@ function ResultGrid() {
 
         }
         getData()
-    }, [query, activeTab]);
+    }, [query, activeTab,dispatch]);
 
     if(error) return <h1>error</h1>;
     if(loading) return <h1>Loading....</h1>
@@ -66,7 +68,7 @@ function ResultGrid() {
         <div className=" flex justify-between w-full flex-wrap gap-2 overflow-auto px-10" >
             {results.map((item,idx) => {
                 return <div key={idx} >
-                    <a href=""><ResultCard item={item} /></a>
+                    <ResultCard item={item} />
                 </div>
             })}
         </div>
