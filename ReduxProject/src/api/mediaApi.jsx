@@ -3,6 +3,7 @@ import axios from "axios";
 const UNSPLASH_KEY = import.meta.env.VITE_UNSPLASH_KEY;
 const PEXELS_KEY = import.meta.env.VITE_PEXELS_KEY;
 const TENOR_KEY = import.meta.env.VITE_TENOR_KEY;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export async function fetchPhotos(query, page = 1, per_page = 30) {
   const res = await axios.get(
@@ -47,8 +48,28 @@ export const fetchGIF = async (query, limit = 50) => {
   return res.data;
 };
 
+
+
+
+const API = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// 🔐 Login API
+export const loginUser = async (data) => {
+  const res = await API.post("/login", data);
+  return res.data;
+};
+
+
+
+
 export default {
   fetchGIF,
   fetchPhotos,
-  fetchVideo
+  fetchVideo,
+  loginUser,
 }

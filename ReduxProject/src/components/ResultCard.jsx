@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { addCollection } from "../redux/features/collectionSlice";
+import { addCollection, addedTost } from "../redux/features/collectionSlice";
 
 function ResultCard({ item }) {
 
@@ -7,6 +7,7 @@ function ResultCard({ item }) {
 
     const addToCollection = (item) => {
         dispatch(addCollection(item));
+        dispatch(addedTost());
     }
 
   return (
@@ -20,6 +21,7 @@ function ResultCard({ item }) {
         <h1 className='text-xs font-semibold capitalize leading-tight line-clamp-2 ' >{item.title}</h1>
         <button onClick={() => {
           addToCollection(item)
+          addedTost()
         }} className='px-3 py-1 active:scale-95  rounded bg-blue-500 text-white cursor-pointer font-medium ' >Save</button>
       </div>
     </div>
