@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../redux/features/auth";
 import { loginUser } from "../../api/mediaApi";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -27,11 +28,15 @@ function Login() {
         token: res.token,
       };
 
+      if (!res.token) {
+        navigate("/login");
+        return;
+      }
+
       dispatch(setLogin(authData));
+      navigate("/");
 
-      NavLink("/");
-
-      console.log("Login Success:", authData);
+      // console.log("Login Success:", authData);
     } catch (err) {
       console.error(err.response?.data?.message || "Login failed");
     }
@@ -65,7 +70,12 @@ function Login() {
           <p className="text-red-400 text-sm">{errors.password.message}</p>
         )}
 
+        <NavLink to="/auth/register" className="text-sm text-blue-500 mb-4 block">
+          Don't have an account? Register
+        </NavLink>
+
         <button
+          type="submit"
           disabled={isSubmitting}
           className="w-full bg-blue-600 py-3 rounded text-white"
         >

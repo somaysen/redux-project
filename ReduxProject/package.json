@@ -18,7 +18,8 @@
     "react-hook-form": "^7.69.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.11.0",
-    "react-toastify": "^11.0.5"
+    "react-toastify": "^11.0.5",
+    "remixicon": "^4.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

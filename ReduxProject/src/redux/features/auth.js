@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { redirect } from "react-router";
 
 // 🔹 Safe localStorage read
 const storedAuth = (() => {
@@ -23,6 +24,12 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.isAuthenticated = true;
       localStorage.setItem("auth", JSON.stringify(action.payload));
+      if(!action.payload.token){
+        state.isAuthenticated = false;
+      }
+      if(state.isAuthenticated){
+        redirect("/");
+      }
     },
 
     // ✅ Register (same behaviour)

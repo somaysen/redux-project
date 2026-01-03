@@ -64,6 +64,10 @@ export const loginUser = async (data) => {
   return res.data;
 };
 
+export const registerUser = async (data) => {
+  const res = await API.post("/register", data);
+  return res.data;
+};
 
 
 
@@ -72,4 +76,5 @@ export default {
   fetchPhotos,
   fetchVideo,
   loginUser,
+  registerUser
 }
