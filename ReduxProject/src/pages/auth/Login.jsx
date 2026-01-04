@@ -55,7 +55,7 @@ function Login() {
     <div className="min-h-screen flex items-center justify-center bg-slate-900">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-slate-800 p-8 rounded-xl w-[350px]"
+        className="bg-slate-800 p-8 rounded-xl w-[30vw]"
       >
         <h1 className="text-white text-2xl mb-4 text-center">Login</h1>
 
