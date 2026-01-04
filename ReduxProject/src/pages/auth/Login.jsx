@@ -16,31 +16,40 @@ function Login() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      const res = await loginUser(data);
+  try {
+    const res = await loginUser(data);
 
-      // 🔐 Sensitive data remove + token attach
-      const authData = {
-        _id: res.user._id,
-        name: res.user.name,
-        email: res.user.email,
-        role: res.user.role,
-        token: res.token,
-      };
+    console.log("LOGIN RESPONSE:", res.data);
 
-      if (!res.token) {
-        navigate("/login");
-        return;
-      }
+    const { user, token } = res.data || {};
 
-      dispatch(setLogin(authData));
-      navigate("/");
-
-      // console.log("Login Success:", authData);
-    } catch (err) {
-      console.error(err.response?.data?.message || "Login failed");
+    if (!token || !user) {
+      throw new Error("Invalid login response");
     }
-  };
+
+    dispatch(
+      setLogin({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        token,
+      })
+    );
+
+    navigate("/");
+
+  } catch (err) {
+    console.error("LOGIN ERROR:", err);
+    alert(
+      err.response?.data?.message ||
+      err.message ||
+      "Login failed"
+    );
+  }
+};
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-900">

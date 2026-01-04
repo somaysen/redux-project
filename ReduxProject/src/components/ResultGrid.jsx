@@ -20,18 +20,20 @@ function ResultGrid() {
                 let data = []
                 if (activeTab == 'photos') {
                     let response = await fetchPhotos(query);
-                    data = response.results.map((item) => ({
+                    data = response.data.images.results.map((item) => ({
                         id: item.id,
                         type: "photo",
                         title: item.alt_description,
                         thumbnail: item.urls.small,
                         src: item.urls.full,
                         url:item.links.html
-                    }))
+                    }
+                    // console.log(data)
+                ))
                 }
                 if (activeTab == 'videos') {
                     let response = await fetchVideo(query);
-                    data = response.videos.map((item) => ({
+                    data = response.data.videos.videos.map((item) => ({
                         id: item.id,
                         type: "video",
                         title: item.user.name || 'video',
@@ -42,7 +44,7 @@ function ResultGrid() {
                 }
                 if (activeTab == 'gif') {
                     let response = await fetchGIF(query);
-                    data = response.results.map((item) => ({
+                    data = response.data.gifs.results.map((item) => ({
                         id: item.id,
                         title: item.title || 'GIF',
                         type: 'gif',
