@@ -20,11 +20,20 @@ export const registerUser = async (data) => {
   return res.data;
 };
 
-export const fetchPhotos = async (query) => {
+
+export const fetchAllMedia = async (query) => {
   const res = await API.get("/posts/media", {
     params: { query },
   });
   console.log(res.data);
+  return res.data;
+}
+
+export const fetchPhotos = async (query) => {
+  const res = await API.get("/posts/media", {
+    params: { query },
+  });
+  // console.log(res.data);
   return res.data;
 }
 
@@ -32,7 +41,7 @@ export const fetchVideo = async (query) => {
   const res = await API.get("/posts/media", {
     params: { query },
   });
-  console.log(res.data);
+  // console.log(res.data);
   return res.data;
 }
 
@@ -40,7 +49,7 @@ export const fetchGIF = async (query) => {
   const res = await API.get("/posts/media", {
     params: { query },
   });
-  console.log(res.data);
+  // console.log(res.data);
   return res.data;
 }
 
@@ -50,5 +59,6 @@ export default {
   fetchPhotos,
   fetchVideo,
   loginUser,
-  registerUser
+  registerUser,
+  fetchAllMedia,
 }

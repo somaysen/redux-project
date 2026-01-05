@@ -53,6 +53,40 @@ function ResultGrid() {
                         url:item.url
                     }))
                 }
+                
+                if (activeTab == 'All') {
+                    let [photoRes, videoRes, gifRes] = await Promise.all([
+                        fetchPhotos(query),
+                        fetchVideo(query),
+                        fetchGIF(query)
+                    ]);
+                    const photoData = photoRes.data.images.results.map((item) => ({
+                        id: item.id,
+                        type: "photo",
+                        title: item.alt_description,
+                        thumbnail: item.urls.small,
+                        src: item.urls.full,
+                        url:item.links.html
+                    }));
+                    const videoData = videoRes.data.videos.videos.map((item) => ({
+                        id: item.id,
+                        type: "video",
+                        title: item.user.name || 'video',
+                        thumbnail: item.image,
+                        src: item.video_files[0].link,
+                        url:item.url
+                    }));
+                    const gifData = gifRes.data.gifs.results.map((item) => ({
+                        id: item.id,
+                        title: item.title || 'GIF',
+                        type: 'gif',
+                        thumbnail: item.media_formats.tinygif.url,
+                        src: item.media_formats.gif.url,
+                        url:item.url
+                    }));
+                    data = [...photoData, ...videoData, ...gifData];
+                }
+
                 console.log(data)
                 dispatch(setResults(data))
             } catch (error) {

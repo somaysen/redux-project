@@ -5,7 +5,7 @@ function Tabs() {
   const dispatch = useDispatch();
   const activeTab = useSelector((state) => state.search.activeTab)
 
-  const tabs = ["photos", "videos", "gif"];
+  const tabs = ["All", "photos", "videos", "gif"];
 
   return (
     <div className="flex gap-5 p-10">
