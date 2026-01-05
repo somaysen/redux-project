@@ -12,14 +12,14 @@ const storedAuth = (() => {
 
 const initialState = {
   user: storedAuth || null,
-  isAuthenticated: !!storedAuth,
+  isAuthenticated: !! storedAuth,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // ✅ Login
+    //  Login
     setLogin: (state, action) => {
       state.user = action.payload;
       state.isAuthenticated = true;
