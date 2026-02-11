@@ -12,7 +12,6 @@ function Register() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm();
 
@@ -36,6 +35,8 @@ function Register() {
       console.log("Register Success:", authData);
     } catch (err) {
       console.error(err.response?.data?.message || "Register failed");
+      console.log(err);
+      toast.error(err.response?.data?.message || "Register failed");
     }
   };
 

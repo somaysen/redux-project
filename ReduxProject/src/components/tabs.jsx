@@ -1,11 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import  {setActiveTads}  from "../redux/features/searchSlice";
+import  {setActiveTads, setLoading}  from "../redux/features/searchSlice";
 
 function Tabs() {
   const dispatch = useDispatch();
   const activeTab = useSelector((state) => state.search.activeTab)
+  // dispatch(setActiveTads(activeTab()));
+  dispatch(setLoading(false));
 
   const tabs = ["All", "photos", "videos", "gif"];
+
+
 
   return (
     <div className="flex gap-5 p-10">

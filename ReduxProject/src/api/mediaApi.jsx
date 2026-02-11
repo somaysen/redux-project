@@ -9,14 +9,23 @@ const API = axios.create({
   },
 });
 
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+
 // 🔐 Login API
 export const loginUser = async (data) => {
   const res = await API.post("/login", data);
+  localStorage.setItem("token", res.data.token);
   return res; // return full axios response so callers can access `res.data`
 };
 
 export const registerUser = async (data) => {
   const res = await API.post("/register", data);
+  localStorage.setItem("token", res.data.token);
   return res.data;
 };
 

@@ -1,14 +1,17 @@
 import { useDispatch } from "react-redux";
 import { addCollection, addedTost } from "../redux/features/collectionSlice";
+import { setLoading } from "../redux/features/searchSlice";
 
 function ResultCard({ item }) {
 
     const dispatch = useDispatch();
 
     const addToCollection = (item) => {
+        dispatch(setLoading())
         dispatch(addCollection(item));
         dispatch(addedTost());
     }
+
 
   return (
     <div className='w-[18vw] h-66 relative bg-zinc-300  rounded-2xl overflow-hidden ' >

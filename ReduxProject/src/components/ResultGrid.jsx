@@ -90,12 +90,12 @@ function ResultGrid() {
                 console.log(data)
                 dispatch(setResults(data))
             } catch (error) {
-                dispatch(setError(error.mess))
+                dispatch(setError(error.message || String(error)))
             }
 
         }
         getData()
-    }, [query, activeTab,dispatch]);
+    }, [query, activeTab]);
 
     if(error) return <h1>error</h1>;
     if(loading) return <h1>Loading....</h1>
